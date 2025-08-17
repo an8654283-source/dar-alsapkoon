@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>منصة دار السابقون</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="site-bg">
+  <!-- Splash overlay showing logo before entering the site -->
+  <div id="splash" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0b1220;z-index:99999;transition:opacity .6s ease">
+    <div style="text-align:center;color:#fff">
+  <img src="../لوجو.jpg" alt="لوجو دار السابقون" style="max-width:320px;max-height:320px;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.6)">
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="branding">
+      <div class="logo">دار <span>السابقون</span></div>
+    </div>
+    <nav class="top-nav">
+      <a href="index.html" class="nav-link active">الرئيسية</a>
+      <a href="login.html" class="nav-link">تسجيل الدخول</a>
+      <button type="button" class="main-btn" onclick="showAbout()">حول</button>
+    </nav>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <div class="hero-card">
+      <h1>مرحباً بك في منصة دار السابقون</h1>
+      <p>متابعة الحفظ، عرض الأوائل، وإدارة كاملة للشيخ بواجهة تفاعلية.</p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <h3>القرآن</h3>
+        <p>متابعة الصفحات والتقدير</p>
+      </div>
+      <div class="feature">
+        <h3>الحديث</h3>
+        <p>الأربعين النووية وملفات PDF</p>
+      </div>
+      <div class="feature">
+        <h3>السيرة</h3>
+        <p>تسجيلات صوتية وإدارة الشيوخ</p>
+      </div>
+    </div>
+  </main>
+
+  <section id="about" class="hero-card" style="max-width:1100px;margin:24px auto;padding:28px;display:none;">
+    <div class="about-grid">
+      <div class="about-left">
+        <h2>حول منصة دار السابقون</h2>
+        <p class="lead">منصة رقمية متكاملة لرفع مستوى الحفظ والإدارة التعليمية بشكل عصري وسهل. توفر المنصة أدوات لكل الأطراف: <strong>الشيخ</strong> يتابع ويُقيّم، و<em>الطلاب</em> يتابعون تقدمهم ويتلقون مواد تعليمية.</p>
+
+        <ul class="about-list">
+          <li>تسجيل ومتابعة بيانات الطلاب وسجلات الحفظ.</li>
+          <li>نظام نقاط متقدم لعرض الأوائل وبناء الحوافز.</li>
+          <li>رفع ومشاركة ملفات PDF، تسجيلات صوتية، وإدارة الواجبات.</li>
+          <li>لوحة تحكم للشيخ مع إمكانية تحديث السجلات والتقارير.</li>
+          <li>دعم متصفح وهاتف مع الحفاظ على خصوصية البيانات.</li>
+        </ul>
+
+        <div class="about-cta">
+          <a class="cta whatsapp" href="https://wa.me/201044810745" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.52 3.48A11.95 11.95 0 0 0 12 0C5.373 0 .01 5.373.01 12c0 2.113.55 4.07 1.51 5.82L0 24l6.39-1.67A11.962 11.962 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.247-6.17-3.48-8.52z" fill="#25D366"/>
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.149-.672.15-.198.297-.768.967-.942 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.884-.788-1.48-1.762-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.174.2-.298.3-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.618-.92-2.213-.242-.579-.487-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.212 3.074c.149.198 2.095 3.2 5.077 4.487 3 .,1 3.4.223 3.68.197.275-.025 1.758-.718 2.006-1.411.248-.695.248-1.29.173-1.411-.074-.123-.273-.198-.57-.347z" fill="#fff"/>
+            </svg>
+            تواصل معنا عبر واتساب
+          </a>
+          <a class="cta" href="login.html">دخول / تسجيل</a>
+        </div>
+      </div>
+
+      <aside class="about-right">
+        <div class="feature-visual">
+          <h3>ماذا نقدم؟</h3>
+          <div class="features-list">
+            <div class="fitem"><strong>📘</strong><span>متابعة صفحات الحفظ</span></div>
+            <div class="fitem"><strong>🏆</strong><span>عرض الأوائل بنظام نقاط</span></div>
+            <div class="fitem"><strong>📤</strong><span>رفع ملفات PDF وتسجيلات</span></div>
+            <div class="fitem"><strong>⚙️</strong><span>لوحة تحكم كاملة للشيخ</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© جميع الحقوق محفوظة - منصة دار السابقون</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // hide splash after 1800ms, allow click or key to skip
+    (function(){
+      const splash = document.getElementById('splash');
+      if (!splash) return;
+      const hide = () => { splash.style.opacity = '0'; setTimeout(()=> splash.remove(), 700); };
+      setTimeout(hide, 1800);
+      splash.addEventListener('click', hide);
+      window.addEventListener('keydown', hide, { once: true });
+    })();
+  </script>
+  <!-- Credit bar and modal -->
+  <div class="credit-bar" role="presentation">
+    <div class="credit-inner">Prepared by Ahmed Nour &amp; collaborators — Dr. Sami Safsaf</div>
+    <div class="badge">Designed &amp; Coded</div>
+  </div>
+  <div id="creditsModal" class="modal credits-modal" style="display:none">
+    <div class="modal-content">
+      <h3>Platform Credits</h3>
+      <p>This platform was proudly prepared by developer Ahmed Nour and his collaborators, with academic guidance from Dr. Sami Safsaf. It combines modern web practices and local-first storage to provide a fast, privacy-aware experience for teachers and students.</p>
+      <p style="margin-top:12px;font-weight:700">Ahmed Nour — Lead Developer<br>Collaborators — Frontend &amp; UX<br>Dr. Sami Safsaf — Academic Consultant</p>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="main-btn" onclick="closeCreditsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

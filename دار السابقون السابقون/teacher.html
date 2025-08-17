@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>حساب الشيخ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="teacher-bg">
+  <div class="teacher-container">
+    <div class="welcome-banner-wrapper">
+      <img src="../لوجو.jpg" alt="لوجو" class="welcome-logo-top" tabindex="0" aria-label="شعار دار السابقون" onclick="showLogoPreview()" />
+      <div class="welcome-banner">
+        <div class="welcome-text">
+          <h2>مرحباً بك في منصة دار السابقون</h2>
+          <p>متابعة الحفظ، عرض الأوائل، وإدارة كاملة للشيخ بواجهة تفاعلية</p>
+        </div>
+      </div>
+    </div>
+    <div class="content-stack">
+    <h2 id="welcomeTeacher">حساب الشيخ</h2>
+
+    <!-- Teacher dashboard: stats + quick actions -->
+    <div class="teacher-dashboard">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value" id="statStudents">0</div>
+          <div class="stat-label">إجمالي الطلاب</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statPages">0</div>
+          <div class="stat-label">إجمالي صفحات الحفظ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statTopLeader">—</div>
+          <div class="stat-label">الأول حالياً</div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="main-btn" onclick="openAddStudentModal()">➕ إضافة طالب</button>
+  <button class="main-btn" onclick="showSection('leaders')">🏆 إدارة الأوائل</button>
+  <button class="main-btn" onclick="showSection('records')">📋 سجل التسميع</button>
+      </div>
+    </div>
+
+    <!-- Add Student Modal (hidden) -->
+    <div id="addStudentModal" class="modal" style="display:none">
+      <div class="modal-content">
+        <h3>إضافة طالب جديد</h3>
+        <input type="text" id="modalStudentName" placeholder="اسم الطالب">
+        <input type="text" id="modalStudentCategory" placeholder="الفئة">
+        <input type="text" id="modalStudentPhone" placeholder="رقم الهاتف (يبدأ بـ 01)">
+        <input type="file" id="modalStudentImg" accept="image/*">
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button class="cta" onclick="saveStudentFromModal()">حفظ</button>
+          <button class="main-btn" onclick="closeAddStudentModal()">إغلاق</button>
+        </div>
+        <hr style="margin:12px 0">
+        <h4>المحذوفات</h4>
+        <div id="deletedList" style="max-height:220px;overflow:auto"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button class="main-btn" onclick="purgeDeletedStudents()">حذف الكل نهائياً</button>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <button class="main-btn" onclick="showSection('hadith')">الأحاديث</button>
+      <button class="main-btn" onclick="showSection('audio')">السيرة</button>
+      <button class="main-btn" onclick="showSection('settings')">إعدادات الشيخ</button>
+      <button class="main-btn" onclick="showSection('orders')">طلبات المتجر</button>
+  <button class="main-btn" onclick="showSection('assignments')">الواجبات</button>
+  </nav>
+
+    <section id="section-students" class="section-content">
+      <h3>قائمة الطلاب <input type="search" id="studentSearch" placeholder="ابحث عن طالب" oninput="liveSearchStudents(this.value)" style="margin-inline-start:12px;padding:6px;border-radius:8px;border:1px solid #ccc"></h3>
+      <div style="margin-top:10px">
+        <button class="main-btn" onclick="openAddStudentModal()">➕ إضافة طالب</button>
+      </div>
+      <ul id="studentsList"></ul>
+  </section>
+
+    <section id="section-leaders" class="section-content" style="display:none">
+      <h3>إدارة الأوائل</h3>
+      <input type="text" id="leaderName" placeholder="اسم الطالب لإضافته للأوائل">
+      <input type="number" id="leaderPoints" placeholder="عدد النقاط" min="0">
+      <button onclick="addLeader()">إضافة للأوائل</button>
+      <div id="leadersList"></div>
+    </section>
+
+    <section id="section-hadith" class="section-content" style="display:none">
+      <h3>إضافة حديث للأربعين النووية</h3>
+      <input type="text" id="newHadith" placeholder="نص الحديث">
+      <button onclick="addHadith()">إضافة حديث</button>
+      <input type="file" id="pdfUpload" accept="application/pdf">
+      <button onclick="uploadPDF()">رفع ملف PDF</button>
+      <button class="main-btn" onclick="toggleSection('hadithList')">إخفاء/إظهار الأحاديث</button>
+      <ul id="hadithList"></ul>
+      <ul id="pdfList"></ul>
+    </section>
+
+    <section id="section-audio" class="section-content" style="display:none">
+      <h3>رفع تسجيل صوتي للسيرة</h3>
+      <input type="file" id="audioUpload" accept="audio/*">
+      <button onclick="uploadAudio()">رفع التسجيل</button>
+      <button class="main-btn" onclick="toggleSection('audioList')">إخفاء/إظهار التسجيلات</button>
+      <ul id="audioList"></ul>
+    </section>
+
+  <!-- section-save removed as requested -->
+
+    <section id="section-settings" class="section-content" style="display:none">
+      <h3>إعدادات الشيخ</h3>
+      <input type="text" id="teacherNameEdit" placeholder="اسم الشيخ الجديد">
+      <input type="text" id="teacherPhoneEdit" placeholder="رقم الهاتف الجديد">
+      <input type="file" id="teacherImgEdit" accept="image/*">
+      <button onclick="updateTeacherSettings()">حفظ التغييرات</button>
+      <div id="teacherImgPreview"></div>
+    </section>
+
+    <section id="section-records" class="section-content" style="display:none">
+      <h3>سجل التسميع لكل طالب</h3>
+      <ul id="studentsRecordsList"></ul>
+    </section>
+
+    <section id="section-assignments" class="section-content" style="display:none">
+      <h3>إدارة الواجبات</h3>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+        <button class="main-btn" onclick="openAddAssignmentModal()">➕ إضافة واجب</button>
+      </div>
+      <div style="margin-top:8px">
+        <h4>قائمة الواجبات</h4>
+        <ul id="assignmentsList"></ul>
+      </div>
+      <!-- Add Assignment Modal -->
+      <div id="addAssignmentModal" class="modal" style="display:none">
+        <div class="modal-content">
+          <h3>إضافة واجب</h3>
+          <input type="text" id="assignmentTitle" placeholder="عنوان الواجب">
+          <input type="number" id="assignmentPages" placeholder="عدد صفحات (مثال: 5)" min="0">
+          <input type="number" id="assignmentHadiths" placeholder="عدد الأحاديث (مثال: 2)" min="0">
+          <input type="date" id="assignmentDue" placeholder="الموعد النهائي">
+          <select id="assignmentAssignTo">
+            <option value="all">لكل الطلاب</option>
+          </select>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+            <button class="cta" onclick="saveAssignmentFromModal()">حفظ</button>
+            <button class="main-btn" onclick="closeAddAssignmentModal()">إغلاق</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section id="section-orders" class="section-content" style="display:none">
+      <h3>طلبات المتجر</h3>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+  <button class="main-btn" onclick="openAddProductModal()">➕ إضافة منتج</button>
+  <button class="main-btn" onclick="purgeStoreProducts()">🗑️ مسح كل المتجر</button>
+      </div>
+      <div style="margin-top:8px">
+        <h4>منتجات المتجر</h4>
+        <ul id="storeList"></ul>
+      </div>
+      <hr>
+      <h4>طلبات الشراء</h4>
+      <ul id="ordersList"></ul>
+      <!-- Add Product Modal -->
+      <div id="addProductModal" class="modal" style="display:none">
+        <div class="modal-content">
+          <h3>إضافة منتج للمتجر</h3>
+          <input type="text" id="productName" placeholder="اسم المنتج">
+          <input type="number" id="productPrice" placeholder="السعر (نقاط)" min="0">
+          <input type="file" id="productImg" accept="image/*">
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+            <button class="cta" onclick="saveProductFromModal()">حفظ</button>
+            <button class="main-btn" onclick="closeAddProductModal()">إغلاق</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+  <script src="script.js"></script>
+  <div class="credit-bar" role="presentation">
+    <div class="credit-inner">Prepared by Ahmed Nour &amp; collaborators — Dr. Sami Safsaf</div>
+    <div class="badge">Designed &amp; Coded</div>
+  </div>
+  <div id="creditsModal" class="modal credits-modal" style="display:none">
+    <div class="modal-content">
+      <h3>Platform Credits</h3>
+      <p>This platform was proudly prepared by developer Ahmed Nour and his collaborators, with academic guidance from Dr. Sami Safsaf. It combines modern web practices and local-first storage to provide a fast, privacy-aware experience for teachers and students.</p>
+      <p style="margin-top:12px;font-weight:700">Ahmed Nour — Lead Developer<br>Collaborators — Frontend &amp; UX<br>Dr. Sami Safsaf — Academic Consultant</p>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="main-btn" onclick="closeCreditsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

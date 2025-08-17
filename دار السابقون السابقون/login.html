@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-bg">
+  <div class="login-container">
+    <div class="login-hero">
+      <h2>تسجيل الدخول</h2>
+      <p class="subtitle">أدخل رقم هاتفك للمتابعة. للشيخ استخدم زر الوصول الخاص.</p>
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="phone" placeholder="رقم الهاتف (يبدأ بـ 01 ويتكون من 11 رقم)" oninput="validatePhone()">
+      <span id="phoneStatus" aria-hidden="true"></span>
+    </div>
+
+    <!-- hidden code field (kept in DOM but not visible) -->
+    <input type="hidden" id="code" value="">
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button class="cta" onclick="login()">دخول</button>
+      <button class="main-btn" onclick="enterTeacherCode()">هل أنت الشيخ؟</button>
+    </div>
+
+    <div id="error" class="error"></div>
+  </div>
+  <script src="script.js"></script>
+  <div class="credit-bar" role="presentation">
+    <div class="credit-inner">Prepared by Ahmed Nour &amp; collaborators — Dr. Sami Safsaf</div>
+    <div class="badge">Designed &amp; Coded</div>
+  </div>
+  <div id="creditsModal" class="modal credits-modal" style="display:none">
+    <div class="modal-content">
+      <h3>Platform Credits</h3>
+      <p>This platform was proudly prepared by developer Ahmed Nour and his collaborators, with academic guidance from Dr. Sami Safsaf. It combines modern web practices and local-first storage to provide a fast, privacy-aware experience for teachers and students.</p>
+      <p style="margin-top:12px;font-weight:700">Ahmed Nour — Lead Developer<br>Collaborators — Frontend &amp; UX<br>Dr. Sami Safsaf — Academic Consultant</p>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="main-btn" onclick="closeCreditsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

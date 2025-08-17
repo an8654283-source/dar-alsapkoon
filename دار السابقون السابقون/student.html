@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>حساب الطالب</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="student-bg">
+  <div class="student-container">
+    <div class="welcome-banner-wrapper">
+      <img src="../لوجو.jpg" alt="لوجو" class="welcome-logo-top" tabindex="0" aria-label="شعار دار السابقون" onclick="showLogoPreview()" />
+      <div class="welcome-banner">
+        <div class="welcome-text">
+          <h2>مرحباً بك في منصة دار السابقون</h2>
+          <p>متابعة الحفظ، عرض الأوائل، وإدارة كاملة للشيخ بواجهة تفاعلية</p>
+        </div>
+      </div>
+    </div>
+    <div class="content-stack">
+  <h2 id="welcomeStudent"></h2>
+  <div id="welcomePoints" style="font-weight:800;margin-bottom:8px">نقاطك: <span id="studentPointsTop">0</span> نقطة</div>
+    <nav>
+      <button class="main-btn" onclick="showTab('subjects')">المواد</button>
+      <button class="main-btn" onclick="showTab('leaders')">الأوائل</button>
+      <button class="main-btn" onclick="showTab('assignments')">الواجبات</button>
+      <button class="main-btn" onclick="showTab('store')">المتجر</button>
+      <button class="main-btn" onclick="showTab('settings')">الإعدادات</button>
+      <button class="main-btn" onclick="showTab('records')">سجل التسميع</button>
+    </nav>
+    <div id="content"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <div class="credit-bar" role="presentation">
+    <div class="credit-inner">Prepared by Ahmed Nour &amp; collaborators — Dr. Sami Safsaf</div>
+    <div class="badge">Designed &amp; Coded</div>
+  </div>
+  <div id="creditsModal" class="modal credits-modal" style="display:none">
+    <div class="modal-content">
+      <h3>Platform Credits</h3>
+      <p>This platform was proudly prepared by developer Ahmed Nour and his collaborators, with academic guidance from Dr. Sami Safsaf. It combines modern web practices and local-first storage to provide a fast, privacy-aware experience for teachers and students.</p>
+      <p style="margin-top:12px;font-weight:700">Ahmed Nour — Lead Developer<br>Collaborators — Frontend &amp; UX<br>Dr. Sami Safsaf — Academic Consultant</p>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="main-btn" onclick="closeCreditsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

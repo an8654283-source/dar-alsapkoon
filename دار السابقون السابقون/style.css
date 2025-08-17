@@ -1,0 +1,323 @@
+/* logo in welcome banners */
+.welcome-banner{position:relative}
+.welcome-logo{position:absolute;top:22px;right:12px;width:72px;height:72px;border-radius:10px;object-fit:cover;cursor:pointer;transform:scale(1);transition:transform .18s ease, box-shadow .18s ease}
+.welcome-logo:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(0,0,0,0.18)}
+.welcome-logo:focus{outline:3px solid rgba(0,122,255,0.18);transform:scale(1.06)}
+.welcome-logo.dragging{opacity:0.85;cursor:grabbing}
+/* slight tilt on move */
+.welcome-logo.tilt{transform: perspective(600px) rotateX(6deg) rotateY(-6deg) scale(1.03)}
+
+/* logo preview overlay */
+#logoPreviewOverlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:99999;padding:24px}
+#logoPreviewOverlay .preview-card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,0.4);max-width:900px;width:100%;display:flex;gap:12px;align-items:center}
+#logoPreviewOverlay img{max-width:320px;max-height:60vh;border-radius:10px;flex-shrink:0}
+#logoPreviewOverlay .preview-meta{flex:1}
+#logoPreviewOverlay .preview-meta h3{margin:0 0 8px}
+#logoPreviewOverlay .preview-actions{display:flex;gap:8px;margin-top:12px}
+#logoPreviewOverlay .btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+#logoPreviewOverlay .btn.primary{background:linear-gradient(90deg,#0072ff,#00c6ff);color:#fff}
+#logoPreviewOverlay .btn.ghost{background:transparent;border:1px solid #ccc}
+
+/* ...existing code... (تضمين كامل الأنماط كما في المثال السابق) */
+/* ...existing code... */
+:root{
+  --bg-1: linear-gradient(135deg,#23dce5,#2016ac);
+  --card-bg: rgba(255,255,255,0.95);
+  --accent: #5433ff;
+  --accent2: #1ec3d9;
+  --muted: #1a1818;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(3, 3, 3, 0.12);
+  --main-font: 'Cairo', Arial, sans-serif;
+}
+/* ...existing code... */
+
+/* استرجاع فئات الخلفية للصفحات (index / login / student / teacher) */
+.site-bg { background: var(--bg-1); min-height: 100vh; background-attachment: fixed; }
+.teacher-bg { background: linear-gradient(135deg,#f6d365,#fda085); min-height: 100vh; background-attachment: fixed; }
+.student-bg { background: linear-gradient(135deg,#a8edea,#fed6e3); min-height: 100vh; background-attachment: fixed; }
+.login-bg { background: linear-gradient(135deg,#89f7fe,#66a6ff); min-height: 100vh; background-attachment: fixed; }
+
+/* تحسين المساحة حول الحاويات لمنع التصاقها بحواف الصفحة */
+.intro-container, .login-container, .student-container, .teacher-container {
+  margin: 28px auto;
+  padding: 20px;
+}
+
+/* ...existing code... */
+*{box-sizing:border-box}
+body{font-family:var(--main-font);direction:rtl;margin:0;background:var(--bg-1);min-height:100vh;color:#222}
+.site-header{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;position:relative}
+.logo{font-weight:800;font-size:1.25rem;color:#fff}
+.logo span{color:#fff;background:rgba(0,0,0,0.12);padding:6px 10px;border-radius:8px;margin-inline-start:8px}
+.branding{display:flex;flex-direction:column;align-items:center;gap:8px}
+.header-logo-below{width:84px;height:84px;border-radius:10px;object-fit:cover;box-shadow:0 10px 30px rgba(0,0,0,0.18);cursor:pointer}
+.top-nav .nav-link{color:#fff;text-decoration:none;margin-left:14px;padding:8px 12px;border-radius:10px;opacity:.95}
+.top-nav .nav-link.active{background:rgba(255,255,255,0.12)}
+.hero{max-width:1100px;margin:40px auto;display:grid;grid-template-columns:1fr 360px;gap:24px;padding:0 20px}
+.hero-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px}
+.hero-card h1{margin:0 0 12px;color:#222}
+.hero-card p{color:var(--muted);margin:0 0 18px}
+.cta{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:700}
+.features{display:flex;flex-direction:column;gap:12px}
+.feature{background:rgba(255,255,255,0.95);padding:18px;border-radius:12px;box-shadow:var(--shadow);text-align:center}
+.feature h3{margin:0 0 8px}
+.site-footer{text-align:center;color:#fff;padding:20px 0;opacity:.9;margin-top:40px}
+
+/* common */
+.intro-container, .login-container, .student-container, .teacher-container {
+  max-width: 900px;
+  margin: 24px auto;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.login-container{max-width:420px;text-align:center}
+nav{margin-bottom:14px;text-align:center}
+.main-btn{
+  margin:5px;padding:10px 18px;border:none;border-radius:12px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;cursor:pointer;font-weight:700;
+}
+.main-btn:hover{opacity:.95;transform:translateY(-2px)}
+input, select {width:100%;margin:8px 0;padding:8px;border-radius:8px;border:1px solid #ccc}
+button {margin-top:8px;border-radius:8px;background:#43cea2;color:#fff;border:none;padding:8px 16px;cursor:pointer}
+button:hover{opacity:0.95}
+ul{padding:0}
+li{list-style:none;margin:8px 0;background:#f4f4f4;padding:10px;border-radius:8px;display:flex;align-items:center;justify-content:space-between}
+.section-content{display:none;padding:10px 0}
+.section-content.active{display:block}
+.error{color:red;margin-top:10px}
+#login .error{color:red}
+
+/* Enhanced login styles */
+.login-hero{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:18px;border-radius:12px;margin-bottom:12px}
+.login-hero .subtitle{margin:6px 0 0;opacity:0.95}
+.input-group{position:relative;margin-bottom:8px}
+.input-group input{padding-right:34px}
+#phoneStatus{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-weight:700}
+
+/* shake animation for error */
+@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}}
+.login-container.shake{animation:shake .5s}
+
+.login-container .cta{background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px 14px;border-radius:10px;color:#fff;text-decoration:none;border:none;cursor:pointer}
+
+#teacherImgPreview img,#studentsList img,#student-settings-img{max-width:120px;border-radius:12px;margin-inline-start:12px}
+
+/* Welcome banner at top (full width of the container) */
+.welcome-banner{
+  width:100%;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#fff;
+  padding:18px 20px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+  display:flex;
+  flex-direction:row-reverse;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.welcome-banner h2{margin:0 0 6px;font-size:1.35rem}
+.welcome-banner p{margin:0;color:rgba(255,255,255,0.95)}
+
+.welcome-text{flex:1;min-width:0;text-align:right}
+.welcome-logo.inline{position:static;top:auto;right:auto;width:84px;height:84px;margin-right:12px;border-radius:12px}
+
+/* when logo-top class is added, stack vertically with logo centered */
+.welcome-banner.logo-top{flex-direction:column;align-items:center;text-align:center}
+.welcome-banner.logo-top .welcome-text{text-align:center}
+.welcome-banner.logo-top .welcome-logo.inline{margin-right:0;margin-bottom:10px}
+
+/* wrapper to place logo above the welcome box */
+.welcome-banner-wrapper{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
+.welcome-logo-top{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;object-fit:cover;cursor:pointer;box-shadow:0 18px 40px rgba(0,0,0,0.28);background:#fff;padding:6px;transition:transform .18s ease,box-shadow .18s ease;border:4px solid rgba(255,255,255,0.95);z-index:1002}
+.welcome-logo-top:hover{transform:translate(-50%,-50%) scale(1.05);box-shadow:0 20px 48px rgba(0,0,0,0.25)}
+.welcome-logo-top:focus{outline:3px solid rgba(0,122,255,0.18);transform:translate(-50%,-50%) scale(1.03)}
+.welcome-banner-wrapper .welcome-banner{width:100%;max-width:920px;padding-top:40px;position:relative;z-index:1}
+
+@media(max-width:700px){
+  .welcome-logo-top{width:88px;height:88px;transform:translate(-50%,-50%)}
+  .welcome-banner-wrapper .welcome-banner{padding:12px;padding-top:36px}
+}
+
+/* Splash overlay logo */
+#splash img{width:100%;height:auto;max-width:360px;border-radius:14px}
+
+/* Stack remaining cards vertically and keep spacing so nothing overlaps the banner */
+.content-stack{display:flex;flex-direction:column;gap:14px}
+.teacher-container nav, .student-container nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;margin:0}
+.teacher-container .section-content, .student-container #content{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
+
+/* Leaders section layout */
+.leaders-container{display:flex;flex-direction:column;gap:18px;padding:12px}
+.podium{display:flex;justify-content:space-around;align-items:flex-end;gap:12px}
+.podium-item{background:var(--card-bg);border-radius:12px;padding:12px 10px;text-align:center;box-shadow:var(--shadow);width:30%;position:relative;display:flex;flex-direction:column;align-items:center}
+.podium-1{height:170px}
+.podium-2{height:140px}
+.podium-3{height:120px}
+.podium-item .avatar{width:72px;height:72px;border-radius:50%;overflow:hidden;background:#f0f0f0;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.podium-item .avatar img{width:100%;height:100%;object-fit:cover}
+.podium-item .avatar-placeholder{display:inline-block;width:42px;height:42px;border-radius:50%;background:linear-gradient(180deg,#e9e9ef,#f6f6fa)}
+.podium-item .avatar-placeholder.small{width:34px;height:34px}
+.podium-item .name{font-weight:700;margin-bottom:6px}
+.podium-item .badge{background:rgba(0,0,0,0.06);padding:6px 10px;border-radius:10px;font-size:0.9rem;margin-bottom:8px}
+.podium-item .place{position:absolute;right:8px;top:8px;font-weight:800;font-size:1.2rem;opacity:0.12}
+
+/* Rank list */
+.rank-list{display:flex;flex-direction:column;gap:10px}
+.rank-item{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:var(--card-bg);box-shadow:var(--shadow)}
+.rank-num{font-weight:800;font-size:1.2rem;width:44px;text-align:center}
+.rank-info{flex:1;min-width:0}
+.rank-name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank-sub{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:0.9rem;margin-top:6px}
+.rank-percent{background:rgba(0,0,0,0.04);padding:8px;border-radius:50%;width:56px;height:56px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+.rank-points{color:var(--accent);font-weight:700}
+.rank-avatar img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.rank-actions button{margin-left:6px;padding:6px 8px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;cursor:pointer}
+.rank-actions button:hover{opacity:0.95}
+.leaders-container.student-view .rank-actions{display:none}
+
+/* highlight the current student's rank */
+.your-rank-entry{box-shadow:0 18px 40px rgba(0,122,255,0.12);border:2px solid rgba(0,122,255,0.12);background:linear-gradient(180deg,rgba(0,122,255,0.03),rgba(255,255,255,0.02));}
+.your-rank-badge{background:linear-gradient(90deg,#0072ff,#00c6ff);color:#fff;padding:8px 12px;border-radius:12px;font-weight:900;text-align:center;margin-bottom:10px;display:inline-block}
+
+/* Enhanced About section styles */
+.about-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+.about-left h2{margin-top:0}
+.about-left .lead{font-size:1rem;color:var(--muted);line-height:1.6}
+.about-list{margin:14px 0;padding-left:18px}
+.about-list li{margin:8px 0}
+.about-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.cta.whatsapp{display:inline-flex;align-items:center;gap:8px;background:#25D366;padding:10px 14px;border-radius:10px;color:#fff;text-decoration:none;font-weight:700}
+.cta.whatsapp svg{display:inline-block}
+.cta{border-radius:10px;padding:10px 14px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;text-decoration:none;font-weight:700}
+.about-right .feature-visual{background:linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.02));padding:18px;border-radius:12px;box-shadow:var(--shadow);text-align:center}
+.features-list{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+.fitem{display:flex;gap:10px;align-items:center;justify-content:flex-start}
+.fitem strong{font-size:1.4rem}
+
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;}
+  .about-right{order:2}
+}
+
+/* responsive tweaks */
+@media(max-width:700px){
+  .podium{gap:8px}
+  .podium-item{width:32%}
+  .rank-percent{width:44px;height:44px;font-size:0.8rem}
+  .podium-1{height:150px}
+  .podium-2{height:120px}
+  .podium-3{height:100px}
+
+  /* Stack welcome banner items on small screens */
+  .welcome-banner{flex-direction:column;align-items:flex-start;padding:14px}
+  .welcome-logo.inline{width:72px;height:72px;margin-right:0;margin-top:10px}
+  .branding{align-items:flex-start}
+  .header-logo-below{width:64px;height:64px}
+}
+
+/* Teacher dashboard styles */
+.teacher-dashboard{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:16px}
+.teacher-dashboard .stats{display:flex;gap:12px}
+.stat-card{background:var(--card-bg);padding:14px;border-radius:12px;box-shadow:var(--shadow);min-width:140px;text-align:center}
+.stat-value{font-size:1.6rem;font-weight:800;color:var(--accent)}
+.stat-label{color:var(--muted);margin-top:6px}
+.quick-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);z-index:60}
+.modal-content{background:var(--card-bg);padding:18px;border-radius:12px;min-width:320px;box-shadow:var(--shadow)}
+.modal-content input{width:100%;margin:8px 0;padding:8px;border-radius:8px;border:1px solid #ccc}
+
+@media(max-width:900px){
+  .teacher-dashboard{flex-direction:column}
+  .teacher-dashboard .stats{justify-content:space-between}
+}
+
+/* Fancy interactive styles for teacher nav buttons */
+.teacher-container nav .main-btn{
+  --t-accent1: #0066ff;
+  --t-accent2: #00d4ff;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(90deg,var(--t-accent1),var(--t-accent2));
+  color:#fff;
+  padding:12px 18px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,102,255,0.16), inset 0 -2px 0 rgba(0,0,0,0.06);
+  border:none;
+  transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s, filter .22s, opacity .18s;
+  font-weight:800;
+}
+.teacher-container nav .main-btn::after{
+  content:'';
+  position:absolute;left:-40%;top:0;width:40%;height:100%;
+  background:linear-gradient(120deg,rgba(255,255,255,0.22),rgba(255,255,255,0));
+  transform:skewX(-18deg) translateX(0);
+  transition:transform .9s ease;
+  pointer-events:none;
+}
+.teacher-container nav .main-btn:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 18px 40px rgba(0,102,255,0.18), 0 6px 18px rgba(0,0,0,0.12);
+  filter:brightness(1.03);
+}
+.teacher-container nav .main-btn:hover::after{transform:skewX(-18deg) translateX(220%);} 
+.teacher-container nav .main-btn:active{transform:translateY(-2px) scale(.995);}
+.teacher-container nav .main-btn:focus{outline:3px solid rgba(0,214,255,0.18);outline-offset:3px}
+
+/* ripple effect element */
+.teacher-container nav .main-btn .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,0.38);animation:ripple 600ms linear;pointer-events:none}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+
+/* active visual state */
+.teacher-container nav .main-btn.active{transform:translateY(-4px) scale(1.01);box-shadow:0 20px 48px rgba(0,102,255,0.22)}
+
+/* Small responsive tweak for nav buttons */
+@media(max-width:700px){
+  .teacher-container nav .main-btn{flex:1 1 auto;padding:10px;border-radius:10px}
+}
+
+/* Credit banner (horizontal bottom) */
+.credit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background: linear-gradient(90deg,#0f4c81,#0072ff,#00c6ff);
+  background-size: 200% 200%;
+  box-shadow: 0 -10px 30px rgba(3,102,255,0.12);
+  z-index: 9999;
+  cursor: default;
+}
+.credit-bar .credit-inner{
+  color: #fff;
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+@keyframes gradientShift {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.credit-bar{ animation: gradientShift 8s ease infinite; }
+.credit-bar .badge{ position:absolute; left:12px; top:12px; color:rgba(255,255,255,0.92); font-weight:700 }
+
+/* avoid covering content under the banner */
+body{ padding-bottom: 92px; }
+
+/* credits modal tweaks */
+.credits-modal .modal-content { max-width:520px; text-align:right; font-size:15px; }
+.credits-modal .modal-content h3 { margin-top:0; }
+.credits-modal .modal-content p { line-height:1.6 }
